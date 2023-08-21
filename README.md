@@ -8,7 +8,7 @@ Document outline:
 2. Render prop is a function props
 3. render props name is must be render that is convention. you can provide any type of name. but the render name is recommended.
 
-```
+```javascript
 // app.jsx
 import ClickCounter from "./Component/ClickCounter";
 import Counter from "./Component/Counter";
@@ -54,4 +54,46 @@ export default function ClickCounter({ count, incrementHandler }) {
 export default function HoverCounter({ count, incrementHandler }) {
   return <h1 onMouseOver={incrementHandler}>Hover {count} times</h1>;
 }
+```
+
+```javascript
+// Counter.jsx
+// parents components
+import React from "react";
+export default class Counter extends React.Component {
+  state = { count: 0 };
+  incrementHandler = () => {
+    this.setState((prev) => {
+      return {
+        count: prev.count + 1,
+      };
+    });
+  };
+  render() {
+    // eslint-disable-next-line react/prop-types
+    const { children } = this.props;
+    const { count } = this.state;
+    return children(count, this.incrementHandler);
+  }
+}
+
+// User.jsx
+// parent component
+import React from "react";
+export default class User extends React.Component {
+  state = { toggle: false };
+  handleToggle = () => {
+    this.setState((prevState) => ({
+      toggle: !prevState.toggle,
+    }));
+  };
+  render() {
+    // eslint-disable-next-line react/prop-types
+    const { render } = this.props;
+    const { toggle } = this.state;
+    return render(toggle, this.handleToggle);
+  }
+}
+
+
 ```
