@@ -1,8 +1,61 @@
-# React + Vite
+## Date: 18/8/23
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Higher-order functions get a component in their parameter
+2. return a new component
+3. higher order function names start with (with). this is convention
 
-Currently, two official plugins are available:
+code Example:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```jsx
+//withCounter.jsx -> HOC function
+import React from "react";
+export default function withCounter(OriginalComponent) {
+  class NewComponent extends React.Component {
+    state = { count: 0 };
+    handleCounter = () => {
+      this.setState((prev) => {
+        return { count: prev.count + 1 };
+      });
+    };
+    render() {
+      const { count } = this.state;
+      return (
+        <OriginalComponent count={count} handleCounter={this.handleCounter} />
+      );
+    }
+  }
+  return NewComponent;
+}
+
+// ClickCounter.jsx
+import withCounter from "../HOC/withCounter";
+
+// eslint-disable-next-line react-refresh/only-export-components
+function ClickCounter({ count, handleCounter }) {
+  return (
+    <div>
+      <button type="button" onClick={handleCounter}>
+        Click {count} times
+      </button>
+    </div>
+  );
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default withCounter(ClickCounter);
+
+//HoverCounter.jsx
+import withCounter from "../HOC/withCounter";
+
+// eslint-disable-next-line react-refresh/only-export-components
+function ClickCounter({ count, handleCounter }) {
+  return (
+    <div>
+      <h1 onMouseOver={handleCounter}>Hover Count {count} times</h1>
+    </div>
+  );
+}
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default withCounter(ClickCounter);
+```
