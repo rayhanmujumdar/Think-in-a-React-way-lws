@@ -94,6 +94,4 @@ export default class User extends React.Component {
     return render(toggle, this.handleToggle);
   }
 }
-
-
 ```
