@@ -5,6 +5,7 @@ export default class Form extends React.Component {
   constructor(props) {
     super(props);
     this.inputRef = React.createRef();
+    this.functionCache = React.cloneElement(<Input/>)
   }
   componentDidMount() {
     this.inputRef.current.focus();
