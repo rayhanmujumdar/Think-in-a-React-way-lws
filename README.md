@@ -62,5 +62,4 @@ export default useResizeScreen;
     
 
 ## Reference:
-[Reusing logic with custom hooks - React]
-(https://react.dev/learn/reusing-logic-with-custom-hooks)
+[Reusing logic with custom hooks - React](https://react.dev/learn/reusing-logic-with-custom-hooks)
