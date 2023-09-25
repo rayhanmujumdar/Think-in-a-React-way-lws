@@ -1,0 +1,25 @@
+.logo {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.glasses {
+  position: absolute;
+  width: 210px;
+  top: 110px;
+  left: 50px;
+}
+
+.play {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.coloredLine {
+  fill: #52d794;
+}
